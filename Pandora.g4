@@ -10,23 +10,16 @@ block
 
 stat
     : ';'
-    | varlist '=' explist
     | functioncall
-    | label
     | 'break'
     | 'while' exp 'do' block 'end'
     | 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
+    | 'def' varlist ('=' explist)?
     | 'defn' funcname funcbody
-    | 'local' 'function' NAME funcbody
-    | 'def' namelist ('=' explist)?
     ;
 
 retstat
     : 'return' explist? ';'?
-    ;
-
-label
-    : '::' NAME '::'
     ;
 
 funcname
@@ -77,7 +70,7 @@ varOrExp
     ;
 
 var
-    : (NAME | '(' exp ')' varSuffix) varSuffix*
+    : NAME varSuffix*
     ;
 
 varSuffix
@@ -88,26 +81,12 @@ nameAndArgs
     : (':' NAME)? args
     ;
 
-/*
-var
-    : NAME | prefixexp '[' exp ']' | prefixexp '.' NAME
-    ;
-
-prefixexp
-    : var | functioncall | '(' exp ')'
-    ;
-
-functioncall
-    : prefixexp args | prefixexp ':' NAME args 
-    ;
-*/
-
 args
     : '(' explist? ')' | tableconstructor | string
     ;
 
 functiondef
-    : 'function' funcbody
+    : 'function' funcbody | '(' parlist? ')' '=>' block 'end'
     ;
 
 funcbody

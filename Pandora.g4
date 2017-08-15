@@ -86,7 +86,8 @@ args
     ;
 
 functiondef
-    : 'function' funcbody | '(' parlist? ')' '=>' block 'end'
+    : 'function' funcbody
+    | '(' parlist? ')' '=>' block 'end'
     ;
 
 funcbody
@@ -114,25 +115,25 @@ fieldsep
     ;
 
 operatorOr
-	: 'or';
+  : 'or';
 
 operatorAnd
-	: 'and';
+  : 'and';
 
 operatorComparison
-	: '<' | '>' | '<=' | '>=' | '~=' | '==';
+  : '<' | '>' | '<=' | '>=' | '~=' | '==';
 
 operatorStrcat
-	: '..';
+  : '..';
 
 operatorAddSub
-	: '+' | '-';
+  : '+' | '-';
 
 operatorMulDivMod
-	: '*' | '/' | '%' | '//';
+  : '*' | '/' | '%';
 
 operatorBitwise
-	: '&' | '|' | '~' | '<<' | '>>';
+  : '&' | '|' | '~' | '<<' | '>>';
 
 operatorUnary
     : 'not' | '#' | '-' | '~';
@@ -239,17 +240,11 @@ HexDigit
     ;
 
 COMMENT
-    : '--[' NESTED_STR ']' -> channel(HIDDEN)
+    : '/*' .*? '*/' -> skip
     ;
 
 LINE_COMMENT
-    : '--'
-    (                                               // --
-    | '[' '='*                                      // --[==
-    | '[' '='* ~('='|'['|'\r'|'\n') ~('\r'|'\n')*   // --[==AA
-    | ~('['|'\r'|'\n') ~('\r'|'\n')*                // --AAA
-    ) ('\r\n'|'\r'|'\n'|EOF)
-    -> channel(HIDDEN)
+    : '//' ~[\r\n]* -> skip
     ;
 
 WS

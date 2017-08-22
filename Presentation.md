@@ -1,5 +1,7 @@
 ## Pandora Lang
 
+### Comentários
+
 ```c
 // Comentários são iguais ao do C e java
 

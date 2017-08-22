@@ -1,3 +1,5 @@
+## Pandora Lang
+
 ```c
 // Comentários são iguais ao do C e java
 
@@ -6,7 +8,7 @@
  */
 ```
 
-Variáveis são definidas pela keyword 'def'
+### Variáveis são definidas pela keyword 'def'
 
 ```elixir
 def foo = 'String'
@@ -15,6 +17,7 @@ def somaMult = (20 + 20) * 2
 ```
 
 Tokens:
+```
 [@0,0:2='def',<'def'>,1:0]
 [@1,4:6='foo',<NAME>,1:4]
 [@2,8:8='=',<'='>,1:8]
@@ -38,15 +41,18 @@ Tokens:
 [@20,72:72='*',<'*'>,3:25]
 [@21,74:74='2',<INT>,3:27]
 [@22,76:75='<EOF>',<EOF>,4:0]
+```
 
+### Funçôes podem ser definidas por defn
 
-// Funçôes podem ser definidas por defn
-
+```elixir
 defn sum(a, b)
   return a + b
 end
+```
 
 Tokens:
+```
 [@0,0:3='defn',<'defn'>,1:0]
 [@1,5:7='sum',<NAME>,1:5]
 [@2,8:8='(',<'('>,1:8]
@@ -60,15 +66,18 @@ Tokens:
 [@10,28:28='b',<NAME>,2:13]
 [@11,30:32='end',<'end'>,3:0]
 [@12,34:33='<EOF>',<EOF>,4:0]
+```
 
+### Tambem pode ser definido por function e atribuido a uma variavel
 
-// Tambem pode ser definido por function e atribuido a uma variavel
-
+```elixir
 def new_sum = function(a, b)
   return a + b
 end
+```
 
 Tokens:
+```
 [@0,0:2='def',<'def'>,1:0]
 [@1,4:10='new_sum',<NAME>,1:4]
 [@2,12:12='=',<'='>,1:12]
@@ -84,13 +93,16 @@ Tokens:
 [@12,42:42='b',<NAME>,2:13]
 [@13,44:46='end',<'end'>,3:0]
 [@14,48:47='<EOF>',<EOF>,4:0]
+```
 
+### Novo modelo de declarar funcao com arrow function
 
-// Novo modelo de declarar funcao com arrow function
-
+```elixir
 def sub = (a, b) => return a - b end
+```
 
 Tokens:
+```
 [@0,0:2='def',<'def'>,1:0]
 [@1,4:6='sub',<NAME>,1:4]
 [@2,8:8='=',<'='>,1:8]
@@ -106,32 +118,39 @@ Tokens:
 [@12,31:31='b',<NAME>,1:31]
 [@13,33:35='end',<'end'>,1:33]
 [@14,37:36='<EOF>',<EOF>,2:0]
+```
 
-
+```elixir
 defn exec(func, a)
   return func(a)
 end
 
 def result = exec((a) => return a*a end, 10)
+```
 
+### Lexical Errors
 
-
-//Lexical Errors
-
+```elixir
 defn hello
+```
+
+Tokens:
+```
 [@0,0:3='defn',<'defn'>,1:0]
 [@1,5:9='hello',<NAME>,1:5]
 [@2,11:10='<EOF>',<EOF>,2:0]
 line 2:0 mismatched input '<EOF>' expecting '('
+```
 
-
-
-
+```elixir
 def sub = (a, b) => return a - b
 def foo = 'String'
 def foo, bar = 'String', 20
 def somaMult = (20 + 20) * 2
+```
 
+Tokens:
+```
 [@0,0:2='def',<'def'>,1:0]
 [@1,4:6='sub',<NAME>,1:4]
 [@2,8:8='=',<'='>,1:8]
@@ -169,3 +188,4 @@ def somaMult = (20 + 20) * 2
 [@34,107:107='2',<INT>,4:27]
 [@35,109:108='<EOF>',<EOF>,5:0]
 line 2:0 missing 'end' at 'def'
+```

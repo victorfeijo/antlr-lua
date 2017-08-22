@@ -10,8 +10,10 @@
 
 ### Diagramas:
 
+LINE_COMMENT
 ![onelinecomment](https://github.com/victorfeijo/pandora-lang/blob/master/images/LINE_COMMENT.png)
 
+COMMENT
 ![comment](https://github.com/victorfeijo/pandora-lang/blob/master/images/COMMENT.png)
 
 ### Variáveis são definidas pela keyword 'def'
@@ -23,21 +25,39 @@ def somaMult = (20 + 20) * 2
 ```
 
 ### Diagramas:
+stat
+
 ![stat](https://github.com/victorfeijo/pandora-lang/blob/master/images/stat.png)
+
+varlist
 
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/varlist.png)
 
+var
+
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/var.png)
+
+varSuffix
 
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/varSuffix.png)
 
+nameAndArgs
+
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/nameAndArgs.png)
+
+args
 
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/args.png)
 
+explist
+
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/explist.png)
 
+exp
+
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/exp.png)
+
+explist
 
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/explist.png)
 
@@ -82,7 +102,11 @@ end
 
 ### Diagrama do railroad
 
+funcname
+
 ![funcname](https://github.com/victorfeijo/pandora-lang/blob/master/images/funcname.png)
+
+funcbody
 
 ![funcody](https://github.com/victorfeijo/pandora-lang/blob/master/images/funcbody.png)
 
@@ -157,6 +181,8 @@ Tokens:
 
 ### Diagrama da definição de função
 
+functiondef
+
 ![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/functiondef.png)
 
 
@@ -174,6 +200,31 @@ Tokens:
 line 2:0 mismatched input '<EOF>' expecting '('
 ```
 
+### O 'Map' pode ser criado através da estrutura de dados Table:
+
+```elixir
+def person = {name: 'Jonas'; age: 19; gender: 'M'}
+```
+
+### Diagrama railroad
+
+table
+
+![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/tableconstructor.png)
+
+fieldlist
+
+![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/fieldlist.png)
+
+field
+
+![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/field.png)
+
+fieldsep
+
+![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/fieldsep.png)
+
+
 ### Funções podem receber outras funções por parâmetros
 ```elixir
 defn exec(func, a)
@@ -183,11 +234,9 @@ end
 def result = exec((a) => return a*a end, 10)
 ```
 
-### O 'Map' pode ser criado através da estrutura de dados Table:
+### Diagrama do antlr4:
 
-```elixir
-def person = {name: 'Jonas'; age: 19; gender: 'M'}
-```
+![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_func_tree.png)
 
 ## ABNF da linguagem Pandora (antlr4):
 

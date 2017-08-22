@@ -1,4 +1,4 @@
-// Comentários são iguais ao do C e java
+// Comentários são iguais ao do C
 
 /* Blocos de comentários
  * também seguem os mesmo modelo
@@ -165,3 +165,7 @@ def somaMult = (20 + 20) * 2
 [@34,107:107='2',<INT>,4:27]
 [@35,109:108='<EOF>',<EOF>,5:0]
 line 2:0 missing 'end' at 'def'
+
+
+Sem outros loops, somente while
+'while' exp block 'end'

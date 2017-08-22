@@ -238,7 +238,7 @@ def result = exec((a) => return a*a end, 10)
 
 ![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_func_tree.png)
 
-## ABNF da linguagem Pandora (antlr4):
+## BNF da linguagem Pandora (antlr4):
 
 ```
 grammar Pandora;

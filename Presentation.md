@@ -1,14 +1,18 @@
+```c
 // Comentários são iguais ao do C e java
 
 /* Blocos de comentários
  * também seguem os mesmo modelo
  */
+```
 
-// Variáveis são definidas pela keyword 'def'
+Variáveis são definidas pela keyword 'def'
 
+```elixir
 def foo = 'String'
 def foo, bar = 'String', 20
 def somaMult = (20 + 20) * 2
+```
 
 Tokens:
 [@0,0:2='def',<'def'>,1:0]

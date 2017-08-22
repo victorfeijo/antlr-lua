@@ -78,7 +78,13 @@ end
 
 ### Diagrama do antlr4
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_parse_tree.png)
+![parse_tree](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_parse_tree.png)
+
+### Diagrama do railroad
+
+![funcname](https://github.com/victorfeijo/pandora-lang/blob/master/images/funcname.png)
+
+![funcody](https://github.com/victorfeijo/pandora-lang/blob/master/images/funcbody.png)
 
 Tokens:
 ```
@@ -148,6 +154,11 @@ Tokens:
 [@13,33:35='end',<'end'>,1:33]
 [@14,37:36='<EOF>',<EOF>,2:0]
 ```
+
+### Diagrama da definição de função
+
+![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/functiondef.png)
+
 
 ### Lexical Errors
 

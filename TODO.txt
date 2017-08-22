@@ -1,0 +1,5 @@
+Elaborar  relatório contendo a especificação da linguagem em EBNF e os grafos de sintaxe, o a descriçao da linguagem usada como entrada para a ferramenta gerar o código fonte do analisador léxico, o código fonte gerado, os programas exemplos na linguagem a ser implementada, usados para testar o sistema, e os arquivos gerados com o LOG de saída no analisador léxico identificando os tokens.
+
+* Especificação em EBNF - OK
+* Grafos de sintaxe - OK
+* Programas exemplo - Copiar https://en.wikipedia.org/wiki/Lua_(programming_language) ajeitando com a nossa gramática

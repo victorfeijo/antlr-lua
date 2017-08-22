@@ -8,6 +8,12 @@
  */
 ```
 
+### Diagramas:
+
+![onelinecomment](https://github.com/victorfeijo/pandora-lang/blob/master/images/LINE_COMMENT.png)
+
+![comment](https://github.com/victorfeijo/pandora-lang/blob/master/images/COMMENT.png)
+
 ### Variáveis são definidas pela keyword 'def'
 
 ```elixir
@@ -15,6 +21,13 @@ def foo = 'String'
 def foo, bar = 'String', 20
 def somaMult = (20 + 20) * 2
 ```
+
+### Diagramas:
+![stat](https://github.com/victorfeijo/pandora-lang/blob/master/images/stat.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/varlist.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/var.png)
 
 Tokens:
 ```
@@ -142,50 +155,263 @@ Tokens:
 line 2:0 mismatched input '<EOF>' expecting '('
 ```
 
-```elixir
-def sub = (a, b) => return a - b
-def foo = 'String'
-def foo, bar = 'String', 20
-def somaMult = (20 + 20) * 2
-```
+## ABNF da linguagem Pandora (antlr4):
 
-Tokens:
 ```
-[@0,0:2='def',<'def'>,1:0]
-[@1,4:6='sub',<NAME>,1:4]
-[@2,8:8='=',<'='>,1:8]
-[@3,10:10='(',<'('>,1:10]
-[@4,11:11='a',<NAME>,1:11]
-[@5,12:12=',',<','>,1:12]
-[@6,14:14='b',<NAME>,1:14]
-[@7,15:15=')',<')'>,1:15]
-[@8,17:18='=>',<'=>'>,1:17]
-[@9,20:25='return',<'return'>,1:20]
-[@10,27:27='a',<NAME>,1:27]
-[@11,29:29='-',<'-'>,1:29]
-[@12,31:31='b',<NAME>,1:31]
-[@13,33:35='def',<'def'>,2:0]
-[@14,37:39='foo',<NAME>,2:4]
-[@15,41:41='=',<'='>,2:8]
-[@16,43:50=''String'',<CHARSTRING>,2:10]
-[@17,52:54='def',<'def'>,3:0]
-[@18,56:58='foo',<NAME>,3:4]
-[@19,59:59=',',<','>,3:7]
-[@20,61:63='bar',<NAME>,3:9]
-[@21,65:65='=',<'='>,3:13]
-[@22,67:74=''String'',<CHARSTRING>,3:15]
-[@23,75:75=',',<','>,3:23]
-[@24,77:78='20',<INT>,3:25]
-[@25,80:82='def',<'def'>,4:0]
-[@26,84:91='somaMult',<NAME>,4:4]
-[@27,93:93='=',<'='>,4:13]
-[@28,95:95='(',<'('>,4:15]
-[@29,96:97='20',<INT>,4:16]
-[@30,99:99='+',<'+'>,4:19]
-[@31,101:102='20',<INT>,4:21]
-[@32,103:103=')',<')'>,4:23]
-[@33,105:105='*',<'*'>,4:25]
-[@34,107:107='2',<INT>,4:27]
-[@35,109:108='<EOF>',<EOF>,5:0]
-line 2:0 missing 'end' at 'def'
+grammar Pandora;
+
+chunk
+    : block EOF
+    ;
+
+block
+    : stat* retstat?
+    ;
+
+stat
+    : ';'
+    | functioncall
+    | 'break'
+    | 'while' exp block 'end'
+    | 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
+    | 'def'? varlist ('=' explist)?
+    | 'defn' funcname funcbody
+    ;
+
+retstat
+    : 'return' explist? ';'?
+    ;
+
+funcname
+    : NAME (':' NAME)?
+    ;
+
+varlist
+    : var (',' var)*
+    ;
+
+namelist
+    : NAME (',' NAME)*
+    ;
+
+explist
+    : exp (',' exp)*
+    ;
+
+exp
+    : 'nil' | 'false' | 'true'
+    | number
+    | string
+    | '...'
+    | functiondef
+    | prefixexp
+    | tableconstructor
+    | <assoc=right> exp operatorPower exp
+    | operatorUnary exp
+    | exp operatorMulDivMod exp
+    | exp operatorAddSub exp
+    | <assoc=right> exp operatorStrcat exp
+    | exp operatorComparison exp
+    | exp operatorAnd exp
+    | exp operatorOr exp
+    | exp operatorBitwise exp
+    ;
+
+prefixexp
+    : varOrExp nameAndArgs*
+    ;
+
+functioncall
+    : varOrExp nameAndArgs+
+    ;
+
+varOrExp
+    : var | '(' exp ')'
+    ;
+
+var
+    : NAME varSuffix*
+    ;
+
+varSuffix
+    : nameAndArgs* ('[' exp ']' | '.' NAME)
+    ;
+
+nameAndArgs
+    : (':' NAME)? args
+    ;
+
+args
+    : '(' explist? ')' | tableconstructor | string
+    ;
+
+functiondef
+    : 'function' funcbody
+    | '(' parlist? ')' '=>' block 'end'
+    ;
+
+funcbody
+    : '(' parlist? ')' block 'end'
+    ;
+
+parlist
+    : namelist (',' '...')? | '...'
+    ;
+
+tableconstructor
+    : '{' fieldlist? '}'
+    ;
+
+fieldlist
+    : field (fieldsep field)* fieldsep?
+    ;
+
+field
+    : '[' exp ']' '=' exp | NAME '=' exp | exp
+    ;
+
+fieldsep
+    : ',' | ';'
+    ;
+
+operatorOr
+  : 'or';
+
+operatorAnd
+  : 'and';
+
+operatorComparison
+  : '<' | '>' | '<=' | '>=' | '~=' | '==';
+
+operatorStrcat
+  : '..';
+
+operatorAddSub
+  : '+' | '-';
+
+operatorMulDivMod
+  : '*' | '/' | '%';
+
+operatorBitwise
+  : '&' | '|' | '~' | '<<' | '>>';
+
+operatorUnary
+    : 'not' | '#' | '-' | '~';
+
+operatorPower
+    : '^';
+
+number
+    : INT | HEX | FLOAT | HEX_FLOAT
+    ;
+
+string
+    : NORMALSTRING | CHARSTRING | LONGSTRING
+    ;
+
+// LEXER
+
+NAME
+    : [a-zA-Z_][a-zA-Z_0-9]*
+    ;
+
+NORMALSTRING
+    : '"' ( EscapeSequence | ~('\\'|'"') )* '"'
+    ;
+
+CHARSTRING
+    : '\'' ( EscapeSequence | ~('\''|'\\') )* '\''
+    ;
+
+LONGSTRING
+    : '[' NESTED_STR ']'
+    ;
+
+fragment
+NESTED_STR
+    : '=' NESTED_STR '='
+    | '[' .*? ']'
+    ;
+
+INT
+    : Digit+
+    ;
+
+HEX
+    : '0' [xX] HexDigit+
+    ;
+
+FLOAT
+    : Digit+ '.' Digit* ExponentPart?
+    | '.' Digit+ ExponentPart?
+    | Digit+ ExponentPart
+    ;
+
+HEX_FLOAT
+    : '0' [xX] HexDigit+ '.' HexDigit* HexExponentPart?
+    | '0' [xX] '.' HexDigit+ HexExponentPart?
+    | '0' [xX] HexDigit+ HexExponentPart
+    ;
+
+fragment
+ExponentPart
+    : [eE] [+-]? Digit+
+    ;
+
+fragment
+HexExponentPart
+    : [pP] [+-]? Digit+
+    ;
+
+fragment
+EscapeSequence
+    : '\\' [abfnrtvz"'\\]
+    | '\\' '\r'? '\n'
+    | DecimalEscape
+    | HexEscape
+    | UtfEscape
+    ;
+
+fragment
+DecimalEscape
+    : '\\' Digit
+    | '\\' Digit Digit
+    | '\\' [0-2] Digit Digit
+    ;
+
+fragment
+HexEscape
+    : '\\' 'x' HexDigit HexDigit
+    ;
+
+fragment
+UtfEscape
+    : '\\' 'u{' HexDigit+ '}'
+    ;
+
+fragment
+Digit
+    : [0-9]
+    ;
+
+fragment
+HexDigit
+    : [0-9a-fA-F]
+    ;
+
+COMMENT
+    : '/*' .*? '*/' -> skip
+    ;
+
+LINE_COMMENT
+    : '//' ~[\r\n]* -> skip
+    ;
+
+WS
+    : [ \t\u000C\r\n]+ -> skip
+    ;
+
+SHEBANG
+    : '#' '!' ~('\n'|'\r')* -> channel(HIDDEN)
+    ;
 ```

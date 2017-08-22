@@ -29,6 +29,18 @@ def somaMult = (20 + 20) * 2
 
 ![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/var.png)
 
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/varSuffix.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/nameAndArgs.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/args.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/explist.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/exp.png)
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/explist.png)
+
 Tokens:
 ```
 [@0,0:2='def',<'def'>,1:0]
@@ -63,6 +75,10 @@ defn sum(a, b)
   return a + b
 end
 ```
+
+### Diagrama do antlr4
+
+![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_parse_tree.png)
 
 Tokens:
 ```
@@ -133,14 +149,6 @@ Tokens:
 [@14,37:36='<EOF>',<EOF>,2:0]
 ```
 
-```elixir
-defn exec(func, a)
-  return func(a)
-end
-
-def result = exec((a) => return a*a end, 10)
-```
-
 ### Lexical Errors
 
 ```elixir
@@ -153,6 +161,21 @@ Tokens:
 [@1,5:9='hello',<NAME>,1:5]
 [@2,11:10='<EOF>',<EOF>,2:0]
 line 2:0 mismatched input '<EOF>' expecting '('
+```
+
+### Funções podem receber outras funções por parâmetros
+```elixir
+defn exec(func, a)
+  return func(a)
+end
+
+def result = exec((a) => return a*a end, 10)
+```
+
+### O 'Map' pode ser criado através da estrutura de dados Table:
+
+```elixir
+def person = {name: 'Jonas'; age: 19; gender: 'M'}
 ```
 
 ## ABNF da linguagem Pandora (antlr4):

@@ -1,4 +1,16 @@
+Universidade Federal de Santa Catarina
+
+Construção de Compiladores
+
+Alunos: - Gabriel Luz, José Victor Feijó, André Pereira
+
+
 ## Pandora Lang
+
+Escolhemos a linguagem de programação Lua como base da definição de nossa gramática por se tratar de uma linguagem simples e moderna, e também foi desenvolvida no Brasil na PUC-RJ
+
+Fizemos algumas mudanças na linguagem para simplificar e também deixar ela mais moderna.
+As mudanças mais aparentes são as definições de variaveis agora é somente por def, definição de função é defn, inclusão de declaração arrow functions. Também removemos loops desnecessários para simplifcação da analise semantica. Agora, While é a única opção para loop da linguagem. Uma troca simples foi a troca sintática de como fazer  comentarios. Originalmente o comentário de linha é --, foi trocado para os padrões definidos em C // para comentario em linha e /* */ para comentarios multi-linha
 
 ### Comentários
 
@@ -13,10 +25,10 @@
 ### Diagramas:
 
 LINE_COMMENT
-![onelinecomment](https://github.com/victorfeijo/pandora-lang/blob/master/images/LINE_COMMENT.png)
+![onelinecomment](images/LINE_COMMENT.png)
 
 COMMENT
-![comment](https://github.com/victorfeijo/pandora-lang/blob/master/images/COMMENT.png)
+![comment](images/COMMENT.png)
 
 ### Variáveis são definidas pela keyword 'def'
 
@@ -29,39 +41,39 @@ def somaMult = (20 + 20) * 2
 ### Diagramas:
 stat
 
-![stat](https://github.com/victorfeijo/pandora-lang/blob/master/images/stat.png)
+![stat](images/stat.png)
 
 varlist
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/varlist.png)
+![vars](images/varlist.png)
 
 var
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/var.png)
+![vars](images/var.png)
 
 varSuffix
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/varSuffix.png)
+![vars](images/varSuffix.png)
 
 nameAndArgs
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/nameAndArgs.png)
+![vars](images/nameAndArgs.png)
 
 args
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/args.png)
+![vars](images/args.png)
 
 explist
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/explist.png)
+![vars](images/explist.png)
 
 exp
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/exp.png)
+![vars](images/exp.png)
 
 explist
 
-![vars](https://github.com/victorfeijo/pandora-lang/blob/master/images/explist.png)
+![vars](images/explist.png)
 
 Tokens:
 ```
@@ -100,17 +112,17 @@ end
 
 ### Diagrama do antlr4
 
-![parse_tree](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_parse_tree.png)
+![parse_tree](images/antlr4_parse_tree.png)
 
 ### Diagrama do railroad
 
 funcname
 
-![funcname](https://github.com/victorfeijo/pandora-lang/blob/master/images/funcname.png)
+![funcname](images/funcname.png)
 
 funcbody
 
-![funcody](https://github.com/victorfeijo/pandora-lang/blob/master/images/funcbody.png)
+![funcody](images/funcbody.png)
 
 Tokens:
 ```
@@ -185,21 +197,22 @@ Tokens:
 
 functiondef
 
-![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/functiondef.png)
+![funcdef](images/functiondef.png)
 
 
 ### Lexical Errors
 
 ```elixir
-defn hello
+def &$#&&$#&$ = 0
 ```
 
 Tokens:
 ```
-[@0,0:3='defn',<'defn'>,1:0]
-[@1,5:9='hello',<NAME>,1:5]
-[@2,11:10='<EOF>',<EOF>,2:0]
-line 2:0 mismatched input '<EOF>' expecting '('
+line 1:5 token recognition error at: '$'
+line 1:9 token recognition error at: '$'
+line 1:12 token recognition error at: '$'
+line 1:4 mismatched input '&' expecting NAME
+
 ```
 
 ### O 'Map' pode ser criado através da estrutura de dados Table:
@@ -212,19 +225,19 @@ def person = {name: 'Jonas'; age: 19; gender: 'M'}
 
 table
 
-![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/tableconstructor.png)
+![funcdef](images/tableconstructor.png)
 
 fieldlist
 
-![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/fieldlist.png)
+![funcdef](images/fieldlist.png)
 
 field
 
-![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/field.png)
+![funcdef](images/field.png)
 
 fieldsep
 
-![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/fieldsep.png)
+![funcdef](images/fieldsep.png)
 
 
 ### Funções podem receber outras funções por parâmetros
@@ -238,9 +251,88 @@ def result = exec((a) => return a*a end, 10)
 
 ### Diagrama do antlr4:
 
-![funcdef](https://github.com/victorfeijo/pandora-lang/blob/master/images/antlr4_func_tree.png)
+![funcdef](images/antlr4_func_tree.png)
 
-## BNF da linguagem Pandora (antlr4):
+## Programa Exemplo
+
+```elixir
+defn fibonacci(n)
+  if n<3 then
+    return 1
+  else
+    return fibonacci(n-1) + fibonacci(n-2)
+  end
+end
+
+def count = 16
+while (count > 0)
+  print(fibonacci(count) ", ")
+  count = count -1;
+end
+```
+Tokens:
+```
+[@0,0:3='defn',<'defn'>,1:0]
+[@1,5:13='fibonacci',<NAME>,1:5]
+[@2,14:14='(',<'('>,1:14]
+[@3,15:15='n',<NAME>,1:15]
+[@4,16:16=')',<')'>,1:16]
+[@5,20:21='if',<'if'>,2:2]
+[@6,23:23='n',<NAME>,2:5]
+[@7,24:24='<',<'<'>,2:6]
+[@8,25:25='3',<INT>,2:7]
+[@9,27:30='then',<'then'>,2:9]
+[@10,36:41='return',<'return'>,3:4]
+[@11,43:43='1',<INT>,3:11]
+[@12,47:50='else',<'else'>,4:2]
+[@13,56:61='return',<'return'>,5:4]
+[@14,63:71='fibonacci',<NAME>,5:11]
+[@15,72:72='(',<'('>,5:20]
+[@16,73:73='n',<NAME>,5:21]
+[@17,74:74='-',<'-'>,5:22]
+[@18,75:75='1',<INT>,5:23]
+[@19,76:76=')',<')'>,5:24]
+[@20,78:78='+',<'+'>,5:26]
+[@21,80:88='fibonacci',<NAME>,5:28]
+[@22,89:89='(',<'('>,5:37]
+[@23,90:90='n',<NAME>,5:38]
+[@24,91:91='-',<'-'>,5:39]
+[@25,92:92='2',<INT>,5:40]
+[@26,93:93=')',<')'>,5:41]
+[@27,97:99='end',<'end'>,6:2]
+[@28,101:103='end',<'end'>,7:0]
+[@29,106:108='def',<'def'>,9:0]
+[@30,110:114='count',<NAME>,9:4]
+[@31,116:116='=',<'='>,9:10]
+[@32,118:119='16',<INT>,9:12]
+[@33,121:125='while',<'while'>,10:0]
+[@34,127:127='(',<'('>,10:6]
+[@35,128:132='count',<NAME>,10:7]
+[@36,134:134='>',<'>'>,10:13]
+[@37,136:136='0',<INT>,10:15]
+[@38,137:137=')',<')'>,10:16]
+[@39,141:145='print',<NAME>,11:2]
+[@40,146:146='(',<'('>,11:7]
+[@41,147:155='fibonacci',<NAME>,11:8]
+[@42,156:156='(',<'('>,11:17]
+[@43,157:161='count',<NAME>,11:18]
+[@44,162:162=')',<')'>,11:23]
+[@45,164:167='", "',<NORMALSTRING>,11:25]
+[@46,168:168=')',<')'>,11:29]
+[@47,172:176='count',<NAME>,12:2]
+[@48,178:178='=',<'='>,12:8]
+[@49,180:184='count',<NAME>,12:10]
+[@50,186:186='-',<'-'>,12:16]
+[@51,187:187='1',<INT>,12:17]
+[@52,188:188=';',<';'>,12:18]
+[@53,190:192='end',<'end'>,13:0]
+[@54,194:193='<EOF>',<EOF>,14:0]
+```
+Diagrama do antlr4:
+![funcdef](images/fibonacci.png)
+
+
+## EBNF da linguagem Pandora (antlr4):
 
 ```
 grammar Pandora;

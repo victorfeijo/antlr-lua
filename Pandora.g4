@@ -13,7 +13,7 @@ stat
     | functioncall
     | 'break'
     | 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
-    | 'def'? varlist ('=' explist)?
+    | 'def'? namelist ('=' explist)?
     | 'defn' funcname funcbody
     ;
 

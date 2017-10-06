@@ -67,6 +67,26 @@ public interface PandoraListener extends ParseTreeListener {
 	 */
 	void exitVarlist(PandoraParser.VarlistContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PandoraParser#definition}.
+	 * @param ctx the parse tree
+	 */
+	void enterDefinition(PandoraParser.DefinitionContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PandoraParser#definition}.
+	 * @param ctx the parse tree
+	 */
+	void exitDefinition(PandoraParser.DefinitionContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PandoraParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void enterAssignment(PandoraParser.AssignmentContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PandoraParser#assignment}.
+	 * @param ctx the parse tree
+	 */
+	void exitAssignment(PandoraParser.AssignmentContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PandoraParser#namelist}.
 	 * @param ctx the parse tree
 	 */

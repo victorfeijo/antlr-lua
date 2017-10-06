@@ -13,7 +13,8 @@ stat
     | functioncall
     | 'break'
     | 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
-    | 'def'? namelist ('=' explist)?
+    | definition
+    | assignment
     | 'defn' funcname funcbody
     ;
 
@@ -27,6 +28,14 @@ funcname
 
 varlist
     : var (',' var)*
+    ;
+
+definition
+    : 'def' namelist ('=' explist)?
+    ;
+
+assignment
+    : namelist ('=' explist)?
     ;
 
 namelist

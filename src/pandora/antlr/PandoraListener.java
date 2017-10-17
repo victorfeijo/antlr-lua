@@ -1,4 +1,4 @@
-// Generated from Pandora.g4 by ANTLR 4.7
+package src.pandora.antlr;// Generated from Pandora.g4 by ANTLR 4.7
 import org.antlr.v4.runtime.tree.ParseTreeListener;
 
 /**

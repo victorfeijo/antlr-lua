@@ -1,3 +1,12 @@
+package src;
+
+import src.pandora.antlr.PandoraLexer;
+import src.pandora.antlr.PandoraParser;
+import src.pandora.antlr.listeners.VariablesListener;
+
+import java.io.FileInputStream;
+import java.io.IOException;
+
 public class Main {
   public static void main(String[] args) {
     try {

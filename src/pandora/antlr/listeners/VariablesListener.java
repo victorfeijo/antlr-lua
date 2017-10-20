@@ -1,28 +1,50 @@
 package src.pandora.antlr.listeners;
 
+import org.antlr.v4.runtime.Token;
 import src.pandora.antlr.PandoraBaseListener;
 import src.pandora.antlr.PandoraParser;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Stack;
 
 public class VariablesListener extends PandoraBaseListener {
-  private Map<String, String> variables;
+    private Map<String, Variable> variables;
 
-  public VariablesListener() {
-    variables = new HashMap<>();
-  }
+    public VariablesListener() {
+        variables = new HashMap<String, Variable>();
+    }
 
-  @Override
-  public void enterAssignment(PandoraParser.AssignmentContext ctx) {
-  // Get variable name
-    System.out.println("Entrei");
-    variables.put("Chave", "Entrei");
-  }
+    @Override
+    public void enterDefinition(PandoraParser.DefinitionContext ctx) {
+      ctx.namelist().NAME().forEach(nameToken -> {
+          if(variables.get(nameToken.getText()) != null) {
+              System.out.println("Variável " + nameToken.getText() + " já foi definida");
+          }
+      });
+    }
 
-  @Override public void exitAssignment(PandoraParser.AssignmentContext ctx) {
-  // Get variable name
-    System.out.println("Sai");
-    variables.put("Outra Chave", "Sai");
-  }
+    @Override
+    public void exitDefinition(PandoraParser.DefinitionContext ctx) {
+        ctx.namelist().NAME().forEach(nameToken -> {
+            variables.put(nameToken.getText(), new Variable(nameToken.getSymbol()));
+        });
+    }
+
+    @Override
+    public void enterAssignment(PandoraParser.AssignmentContext ctx) {
+        ctx.namelist().NAME().forEach(nameToken -> {
+            if(variables.get(nameToken.getText()) == null) {
+                System.out.println("Variável " + nameToken.getText() + " não foi definida");
+            }
+        });
+    }
+
+    @Override
+    public void exitAssignment(PandoraParser.AssignmentContext ctx) {
+        ctx.namelist().NAME().forEach(nameToken -> {
+          variables.put(nameToken.getText(), new Variable(nameToken.getSymbol()));
+        });
+    }
 }

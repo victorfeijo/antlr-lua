@@ -1,6 +1,7 @@
 package src;
 
 import org.antlr.v4.runtime.CharStream;
+import org.antlr.v4.runtime.CommonTokenFactory;
 import org.antlr.v4.runtime.CommonTokenStream;
 import org.antlr.v4.runtime.UnbufferedCharStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
@@ -17,6 +18,7 @@ public class Main {
       CharStream input = new UnbufferedCharStream(new FileInputStream("./samples/variables.pan"));
 
       PandoraLexer lexer = new PandoraLexer(input);
+      lexer.setTokenFactory(new CommonTokenFactory(true));
       CommonTokenStream tokens = new CommonTokenStream(lexer);
       PandoraParser parser = new PandoraParser(tokens);
 
@@ -24,8 +26,7 @@ public class Main {
 
       ParseTreeWalker walker = new ParseTreeWalker();
       walker.walk(new VariablesListener(), chunkContext);
-
-    } catch (IOException e) {
+    } catch (Exception e) {
       e.printStackTrace();
     }
   }

@@ -20,7 +20,7 @@ public class VariablesListener extends PandoraBaseListener {
     public void enterDefinition(PandoraParser.DefinitionContext ctx) {
       ctx.namelist().NAME().forEach(nameToken -> {
           if(variables.get(nameToken.getText()) != null) {
-              System.out.println("Variável " + nameToken.getText() + " já foi definida");
+              throw new RuntimeException("Variable <" + nameToken.getText() + "> already was defined");
           }
       });
     }
@@ -36,7 +36,7 @@ public class VariablesListener extends PandoraBaseListener {
     public void enterAssignment(PandoraParser.AssignmentContext ctx) {
         ctx.namelist().NAME().forEach(nameToken -> {
             if(variables.get(nameToken.getText()) == null) {
-                System.out.println("Variável " + nameToken.getText() + " não foi definida");
+                throw new RuntimeException("Variable <" + nameToken.getText() + "> ins't defined");
             }
         });
     }

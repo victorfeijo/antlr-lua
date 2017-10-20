@@ -15,15 +15,10 @@ stat
     | 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
     | definition
     | assignment
-    | 'defn' funcname funcbody
     ;
 
 retstat
     : 'return' explist? ';'?
-    ;
-
-funcname
-    : NAME (':' NAME)?
     ;
 
 varlist

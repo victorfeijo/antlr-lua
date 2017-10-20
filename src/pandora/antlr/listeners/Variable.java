@@ -1,12 +1,13 @@
 package src.pandora.antlr.listeners;
 
 import org.antlr.v4.runtime.Token;
+import src.pandora.antlr.PandoraParser;
 
 public class Variable {
     private String type;
-    private Token value;
+    private PandoraParser.ExpContext value;
 
-    public Variable(Token value) {
+    public Variable(PandoraParser.ExpContext value) {
         this.value = value;
     }
 
@@ -14,11 +15,7 @@ public class Variable {
         return this.type;
     }
 
-    public Token getValue() {
+    public PandoraParser.ExpContext getValue() {
         return value;
-    }
-
-    public void setValue(Token value) {
-        this.value = value;
     }
 }

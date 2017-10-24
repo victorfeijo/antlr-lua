@@ -231,18 +231,6 @@ public class PandoraBaseListener implements PandoraListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncbody(PandoraParser.FuncbodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFuncbody(PandoraParser.FuncbodyContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterParlist(PandoraParser.ParlistContext ctx) { }
 	/**
 	 * {@inheritDoc}

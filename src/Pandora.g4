@@ -84,20 +84,16 @@ nameAndArgs
     ;
 
 args
-    : '(' explist? ')' | tableconstructor | string
+    : '(' explist? ')'
     ;
 
 functiondef
-    : 'function' funcbody
+    : 'function' '(' parlist? ')' block 'end'
     | '(' parlist? ')' '=>' block 'end'
     ;
 
-funcbody
-    : '(' parlist? ')' block 'end'
-    ;
-
 parlist
-    : namelist (',' '...')? | '...'
+    : namelist
     ;
 
 tableconstructor

@@ -187,16 +187,6 @@ public interface PandoraListener extends ParseTreeListener {
 	 */
 	void exitFunctiondef(PandoraParser.FunctiondefContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PandoraParser#funcbody}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncbody(PandoraParser.FuncbodyContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PandoraParser#funcbody}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncbody(PandoraParser.FuncbodyContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PandoraParser#parlist}.
 	 * @param ctx the parse tree
 	 */

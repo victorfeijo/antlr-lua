@@ -5,4 +5,4 @@ def add = function(a, b)
     return a + b
 end
 
-def add = (b) => return b*b end
+add(1, 2, 4)

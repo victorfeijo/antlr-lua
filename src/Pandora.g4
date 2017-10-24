@@ -42,10 +42,9 @@ explist
     ;
 
 exp
-    : 'nil' | 'false' | 'true'
+    : nil | bool
     | number
     | string
-    | '...'
     | functiondef
     | prefixexp
     | tableconstructor
@@ -150,6 +149,14 @@ number
 
 string
     : NORMALSTRING | CHARSTRING | LONGSTRING
+    ;
+
+bool
+    : 'true' | 'false'
+    ;
+
+nil
+    : 'nil'
     ;
 
 // LEXER

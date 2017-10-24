@@ -63,18 +63,6 @@ public class PandoraBaseListener implements PandoraListener {
 	 *
 	 * <p>The default implementation does nothing.</p>
 	 */
-	@Override public void enterFuncname(PandoraParser.FuncnameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
-	@Override public void exitFuncname(PandoraParser.FuncnameContext ctx) { }
-	/**
-	 * {@inheritDoc}
-	 *
-	 * <p>The default implementation does nothing.</p>
-	 */
 	@Override public void enterVarlist(PandoraParser.VarlistContext ctx) { }
 	/**
 	 * {@inheritDoc}
@@ -442,6 +430,30 @@ public class PandoraBaseListener implements PandoraListener {
 	 * <p>The default implementation does nothing.</p>
 	 */
 	@Override public void exitString(PandoraParser.StringContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterBool(PandoraParser.BoolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitBool(PandoraParser.BoolContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void enterNil(PandoraParser.NilContext ctx) { }
+	/**
+	 * {@inheritDoc}
+	 *
+	 * <p>The default implementation does nothing.</p>
+	 */
+	@Override public void exitNil(PandoraParser.NilContext ctx) { }
 
 	/**
 	 * {@inheritDoc}

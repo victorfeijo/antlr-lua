@@ -47,16 +47,6 @@ public interface PandoraListener extends ParseTreeListener {
 	 */
 	void exitRetstat(PandoraParser.RetstatContext ctx);
 	/**
-	 * Enter a parse tree produced by {@link PandoraParser#funcname}.
-	 * @param ctx the parse tree
-	 */
-	void enterFuncname(PandoraParser.FuncnameContext ctx);
-	/**
-	 * Exit a parse tree produced by {@link PandoraParser#funcname}.
-	 * @param ctx the parse tree
-	 */
-	void exitFuncname(PandoraParser.FuncnameContext ctx);
-	/**
 	 * Enter a parse tree produced by {@link PandoraParser#varlist}.
 	 * @param ctx the parse tree
 	 */
@@ -366,4 +356,24 @@ public interface PandoraListener extends ParseTreeListener {
 	 * @param ctx the parse tree
 	 */
 	void exitString(PandoraParser.StringContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PandoraParser#bool}.
+	 * @param ctx the parse tree
+	 */
+	void enterBool(PandoraParser.BoolContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PandoraParser#bool}.
+	 * @param ctx the parse tree
+	 */
+	void exitBool(PandoraParser.BoolContext ctx);
+	/**
+	 * Enter a parse tree produced by {@link PandoraParser#nil}.
+	 * @param ctx the parse tree
+	 */
+	void enterNil(PandoraParser.NilContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PandoraParser#nil}.
+	 * @param ctx the parse tree
+	 */
+	void exitNil(PandoraParser.NilContext ctx);
 }

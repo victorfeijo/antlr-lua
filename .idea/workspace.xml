@@ -2,16 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="df71d153-3a58-4907-b604-a323291bef3d" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/samples/variables.pan" afterPath="$PROJECT_DIR$/samples/variables.pan" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/Pandora.g4" afterPath="$PROJECT_DIR$/src/Pandora.g4" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/Pandora.tokens" afterPath="$PROJECT_DIR$/src/pandora/antlr/Pandora.tokens" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/PandoraBaseListener.java" afterPath="$PROJECT_DIR$/src/pandora/antlr/PandoraBaseListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/PandoraLexer.java" afterPath="$PROJECT_DIR$/src/pandora/antlr/PandoraLexer.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/PandoraLexer.tokens" afterPath="$PROJECT_DIR$/src/pandora/antlr/PandoraLexer.tokens" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/PandoraListener.java" afterPath="$PROJECT_DIR$/src/pandora/antlr/PandoraListener.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/PandoraParser.java" afterPath="$PROJECT_DIR$/src/pandora/antlr/PandoraParser.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/pandora/antlr/listeners/VariablesListener.java" afterPath="$PROJECT_DIR$/src/pandora/antlr/listeners/VariablesListener.java" />
     </list>
     <ignored path="$PROJECT_DIR$/out/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -41,8 +32,8 @@
       <file leaf-file-name="VariablesListener.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/pandora/antlr/listeners/VariablesListener.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="328">
-              <caret line="93" column="9" lean-forward="true" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+            <state relative-caret-position="178">
+              <caret line="83" column="33" lean-forward="false" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
               <folding>
                 <element signature="imports" expanded="true" />
                 <element signature="e#386#387#0" expanded="true" />
@@ -101,8 +92,8 @@
       <file leaf-file-name="Pandora.g4" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Pandora.g4">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="219">
-              <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
+            <state relative-caret-position="240">
+              <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
               <folding />
             </state>
           </provider>
@@ -142,13 +133,13 @@
         <option value="$PROJECT_DIR$/src/pandora/antlr/listeners/Types.java" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/listeners/Variable.java" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/listeners/FunctionListener.java" />
-        <option value="$PROJECT_DIR$/src/Pandora.g4" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/PandoraBaseListener.java" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/PandoraLexer.java" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/PandoraListener.java" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/PandoraParser.java" />
         <option value="$PROJECT_DIR$/samples/variables.pan" />
         <option value="$PROJECT_DIR$/src/pandora/antlr/listeners/VariablesListener.java" />
+        <option value="$PROJECT_DIR$/src/Pandora.g4" />
       </list>
     </option>
   </component>
@@ -366,7 +357,7 @@
       <window_info id="Capture Analysis" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.32941177" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Capture Tool" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -666,14 +657,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Pandora.g4">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="219">
-          <caret line="88" column="0" lean-forward="true" selection-start-line="88" selection-start-column="0" selection-end-line="88" selection-end-column="0" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/samples/variables.pan">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="105">
@@ -682,10 +665,18 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/Pandora.g4">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="240">
+          <caret line="16" column="16" lean-forward="true" selection-start-line="16" selection-start-column="16" selection-end-line="16" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/pandora/antlr/listeners/VariablesListener.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="328">
-          <caret line="93" column="9" lean-forward="true" selection-start-line="93" selection-start-column="9" selection-end-line="93" selection-end-column="9" />
+        <state relative-caret-position="178">
+          <caret line="83" column="33" lean-forward="false" selection-start-line="83" selection-start-column="33" selection-end-line="83" selection-end-column="33" />
           <folding>
             <element signature="imports" expanded="true" />
             <element signature="e#386#387#0" expanded="true" />

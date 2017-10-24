@@ -12,9 +12,13 @@ stat
     : ';'
     | functioncall
     | 'break'
-    | 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
+    | ifstat
     | definition
     | assignment
+    ;
+
+ifstat
+    : 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
     ;
 
 retstat

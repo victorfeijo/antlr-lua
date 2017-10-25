@@ -1,6 +1,5 @@
 package src.pandora.antlr.listeners;
 
-import org.antlr.v4.runtime.Token;
 import src.pandora.antlr.PandoraParser;
 
 public class Variable {

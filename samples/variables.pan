@@ -1,8 +1,8 @@
-// def foo = 'something'
-// def bar = 'Gabriel'
+def foo = 'something'
+def bar = 'Gabriel'
 
-def add = function(a, b)
-    return a + b
-end
+foo = 10
 
-add(1, 2, 4)
+// Semantic errors
+// def bar = 25
+// some = 20

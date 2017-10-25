@@ -7,15 +7,14 @@ import org.antlr.v4.runtime.UnbufferedCharStream;
 import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import src.pandora.antlr.PandoraLexer;
 import src.pandora.antlr.PandoraParser;
-import src.pandora.antlr.listeners.VariablesListener;
+import src.pandora.antlr.listeners.PandoraGlobalListener;
 
 import java.io.FileInputStream;
-import java.io.IOException;
 
 public class Main {
   public static void main(String[] args) {
     try {
-      CharStream input = new UnbufferedCharStream(new FileInputStream("./samples/variables.pan"));
+      CharStream input = new UnbufferedCharStream(new FileInputStream("./samples/functions.pan"));
 
       PandoraLexer lexer = new PandoraLexer(input);
       lexer.setTokenFactory(new CommonTokenFactory(true));
@@ -25,7 +24,7 @@ public class Main {
       PandoraParser.ChunkContext chunkContext = parser.chunk();
 
       ParseTreeWalker walker = new ParseTreeWalker();
-      walker.walk(new VariablesListener(), chunkContext);
+      walker.walk(new PandoraGlobalListener(), chunkContext);
     } catch (Exception e) {
       e.printStackTrace();
     }

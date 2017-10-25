@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 public class Main {
   public static void main(String[] args) {
     try {
-      CharStream input = new UnbufferedCharStream(new FileInputStream("./samples/functions.pan"));
+      CharStream input = new UnbufferedCharStream(new FileInputStream("./samples/variables.pan"));
 
       PandoraLexer lexer = new PandoraLexer(input);
       lexer.setTokenFactory(new CommonTokenFactory(true));

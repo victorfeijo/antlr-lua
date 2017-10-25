@@ -6,3 +6,5 @@ foo = 10
 // Semantic errors
 // def bar = 25
 // some = 20
+// def some, thing = 20, "string", 30
+// foo, bar = 20, 30, 40

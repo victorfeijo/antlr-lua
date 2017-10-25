@@ -17,6 +17,26 @@ public class VariablesListener {
         });
     }
 
+    public void checkDefinitionSides(PandoraParser.DefinitionContext ctx, Stack blockStack) {
+        List<TerminalNode> nameList = ctx.namelist().NAME();
+        List<PandoraParser.ExpContext> expList = ctx.explist().exp();
+
+        if (nameList.size() != expList.size()) {
+            throw new RuntimeException("Left definition size has <" +
+                    nameList.size() + "> not matching with right <" + expList.size() + ">");
+        }
+    }
+
+    public void checkAssignmentSides(PandoraParser.AssignmentContext ctx, Stack blockStack) {
+        List<TerminalNode> nameList = ctx.namelist().NAME();
+        List<PandoraParser.ExpContext> expList = ctx.explist().exp();
+
+        if (nameList.size() != expList.size()) {
+            throw new RuntimeException("Left assigment size has <" +
+                    nameList.size() + "> not matching with right <" + expList.size() + ">");
+        }
+    }
+
     public void saveDefinition(PandoraParser.DefinitionContext ctx, Stack blockStack) {
         List<TerminalNode> nameList = ctx.namelist().NAME();
         List<PandoraParser.ExpContext> expList = ctx.explist().exp();

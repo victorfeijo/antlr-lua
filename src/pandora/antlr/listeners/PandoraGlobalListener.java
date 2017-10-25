@@ -33,6 +33,7 @@ public class PandoraGlobalListener extends PandoraBaseListener {
     @Override
     public void enterDefinition(PandoraParser.DefinitionContext ctx) {
         this.variablesListener.checkAlreadyDefinied(ctx, this.blockStack);
+        this.variablesListener.checkDefinitionSides(ctx, this.blockStack);
     }
 
     @Override
@@ -43,6 +44,7 @@ public class PandoraGlobalListener extends PandoraBaseListener {
     @Override
     public void enterAssignment(PandoraParser.AssignmentContext ctx) {
         this.variablesListener.checkNotDefined(ctx, this.blockStack);
+        this.variablesListener.checkAssignmentSides(ctx, this.blockStack);
     }
 
     @Override

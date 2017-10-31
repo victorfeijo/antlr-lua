@@ -59,6 +59,19 @@ public class VariablesListener {
         });
     }
 
+    public void checkExpVariables(PandoraParser.VarOrExpContext ctx, HashMap<String, Variable> currentScope) {
+        if (ctx.var() == null) {
+            return;
+        }
+
+        PandoraParser.VarContext variable = ctx.var();
+        String variableName = variable.NAME().getText();
+
+        if (!currentScope.containsKey(variableName)) {
+            throw new RuntimeException("Variable <" + variableName + "> isn't defined");
+        }
+    }
+
     private void saveVariable(List<TerminalNode> nameList, List<PandoraParser.ExpContext> expList, Stack<HashMap<String, Variable>> blockStack) {
         IntStream.range(0, nameList.size())
                 .forEach(idx -> {

@@ -20,19 +20,18 @@ public class PandoraGlobalListener extends PandoraBaseListener {
 
     @Override
     public void enterBlock(PandoraParser.BlockContext ctx) {
-        if (this.blockStack.size() == 0) {
-            this.blockStack.push(new HashMap<String, Variable>());
+        HashMap<String, Variable> nextBlock = new HashMap<String, Variable>();
+
+        if (this.blockStack.size() > 0) {
+            nextBlock.putAll(this.blockStack.peek());
         }
-        else {
-            HashMap<String, Variable> nextBlock = new HashMap<String, Variable>(this.blockStack.peek());
-            System.out.println(nextBlock);
-            System.out.println(this.blockStack.peek());
-        }
+
+        this.blockStack.push(nextBlock);
     }
 
     @Override
     public void exitBlock(PandoraParser.BlockContext ctx) {
-        blockStack.pop();
+        this.blockStack.pop();
     }
 
     @Override
@@ -60,6 +59,13 @@ public class PandoraGlobalListener extends PandoraBaseListener {
     @Override
     public void enterFunctioncall(PandoraParser.FunctioncallContext ctx) {
         this.functionListener.checkFunctionParams(ctx, this.blockStack);
+    }
+
+    @Override
+    public void enterExp(PandoraParser.ExpContext ctx) {
+        if (ctx.prefixexp() != null) {
+            //this.variablesListener.checkExpVariables(ctx.prefixexp().varOrExp(), this.blockStack.peek());
+        }
     }
 }
 

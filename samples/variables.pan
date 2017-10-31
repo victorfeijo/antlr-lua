@@ -1,5 +1,8 @@
-def foo = 'something'
-def bar = 'Gabriel'
+def foo = 'foo'
+def bar = {
+  name = 'bar';
+  size = 20;
+}
 
 foo = 10
 
@@ -8,3 +11,4 @@ foo = 10
 // some = 20
 // def some, thing = 20, "string", 30
 // foo, bar = 20, 30, 40
+foo = bar + something

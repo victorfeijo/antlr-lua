@@ -9,5 +9,5 @@ add((20 + 30), square(10))
 
 // semantic errors
 // add(1)
-// square(1, 2)
+//square(1, 2)
 

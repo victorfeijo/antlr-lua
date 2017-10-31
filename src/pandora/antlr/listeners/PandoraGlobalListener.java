@@ -8,25 +8,30 @@ import java.util.HashMap;
 import java.util.Stack;
 
 public class PandoraGlobalListener extends PandoraBaseListener {
-    private Stack blockStack;
+    private Stack<HashMap<String, Variable>> blockStack;
     private VariablesListener variablesListener;
     private FunctionListener functionListener;
 
     public PandoraGlobalListener() {
-        this.blockStack = new Stack();
+        this.blockStack = new Stack<HashMap<String, Variable>>();
         this.variablesListener = new VariablesListener();
         this.functionListener = new FunctionListener();
     }
 
     @Override
     public void enterBlock(PandoraParser.BlockContext ctx) {
-        //Something starts putting definitions on hash
-        blockStack.push(new HashMap<String, Variable>());
+        if (this.blockStack.size() == 0) {
+            this.blockStack.push(new HashMap<String, Variable>());
+        }
+        else {
+            HashMap<String, Variable> nextBlock = new HashMap<String, Variable>(this.blockStack.peek());
+            System.out.println(nextBlock);
+            System.out.println(this.blockStack.peek());
+        }
     }
 
     @Override
     public void exitBlock(PandoraParser.BlockContext ctx) {
-        //Something pops the definitions from hash
         blockStack.pop();
     }
 

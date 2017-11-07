@@ -1,6 +1,7 @@
 package src.pandora.antlr.listeners;
 
 import src.pandora.antlr.PandoraParser;
+import src.pandora.antlr.listeners.Types;
 
 public class Variable {
     private Types type;

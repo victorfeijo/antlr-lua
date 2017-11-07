@@ -1,13 +1,19 @@
 package src.pandora.antlr.listeners;
 
 import org.antlr.v4.runtime.tree.TerminalNode;
+import src.main.ModuleCreator;
 import src.pandora.antlr.PandoraParser;
 
 import java.util.*;
 import java.util.stream.IntStream;
 
 public class VariablesListener {
-    public VariablesListener() { }
+
+    private ModuleCreator moduleCreator;
+
+    public VariablesListener(ModuleCreator moduleCreator) {
+        this.moduleCreator = moduleCreator;
+    }
 
     public void checkAlreadyDefinied(PandoraParser.DefinitionContext ctx, Stack<HashMap<String, Variable>> blockStack) {
         ctx.namelist().NAME().forEach(nameToken -> {
@@ -78,7 +84,10 @@ public class VariablesListener {
                     TerminalNode nameToken = nameList.get(idx);
                     PandoraParser.ExpContext exp = expList.get(idx);
 
-                    blockStack.peek().put(nameToken.getText(), new Variable(exp));
+                    blockStack.peek().put(
+                            nameToken.getText(),
+                            new Variable(exp));
+
                 });
     }
 }

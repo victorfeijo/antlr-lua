@@ -1,20 +1,25 @@
 package src.pandora.antlr.listeners;
 
+import src.main.ModuleCreator;
 import src.pandora.antlr.PandoraBaseListener;
 import src.pandora.antlr.PandoraParser;
-import src.pandora.antlr.listeners.FunctionListener;
+import src.expressions.PFloat;
+import src.expressions.PInteger;
 
 import java.util.HashMap;
 import java.util.Stack;
+
 
 public class PandoraGlobalListener extends PandoraBaseListener {
     private Stack<HashMap<String, Variable>> blockStack;
     private VariablesListener variablesListener;
     private FunctionListener functionListener;
+    private ModuleCreator moduleCreator;
 
-    public PandoraGlobalListener() {
+    public PandoraGlobalListener(ModuleCreator moduleCreator) {
+        this.moduleCreator = moduleCreator;
         this.blockStack = new Stack<HashMap<String, Variable>>();
-        this.variablesListener = new VariablesListener();
+        this.variablesListener = new VariablesListener(moduleCreator);
         this.functionListener = new FunctionListener();
     }
 
@@ -65,6 +70,21 @@ public class PandoraGlobalListener extends PandoraBaseListener {
     public void enterExp(PandoraParser.ExpContext ctx) {
         if (ctx.prefixexp() != null) {
             //this.variablesListener.checkExpVariables(ctx.prefixexp().varOrExp(), this.blockStack.peek());
+        }
+    }
+
+    @Override
+    public void exitExp(PandoraParser.ExpContext ctx) {
+        ctx.operatorAddSub();
+
+    }
+
+    @Override
+    public void exitNumber(PandoraParser.NumberContext ctx) {
+        if(ctx.INT() != null) {
+            new PInteger(Integer.parseInt(ctx.INT().toString()));
+        } else if(ctx.FLOAT() != null) {
+            new PFloat(Float.parseFloat(ctx.INT().toString()));
         }
     }
 }

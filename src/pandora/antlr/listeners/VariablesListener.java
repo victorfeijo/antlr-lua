@@ -43,18 +43,18 @@ public class VariablesListener {
         }
     }
 
-    public void saveDefinition(PandoraParser.DefinitionContext ctx, Stack<HashMap<String, Variable>> blockStack) {
+    public List<Variable> saveDefinition(PandoraParser.DefinitionContext ctx, Stack<HashMap<String, Variable>> blockStack) {
         List<TerminalNode> nameList = ctx.namelist().NAME();
         List<PandoraParser.ExpContext> expList = ctx.explist().exp();
 
-        this.saveVariable(nameList, expList, blockStack);
+        return this.saveVariable(nameList, expList, blockStack);
     }
 
-    public void saveAssignment(PandoraParser.AssignmentContext ctx, Stack<HashMap<String, Variable>> blockStack) {
+    public List<Variable> saveAssignment(PandoraParser.AssignmentContext ctx, Stack<HashMap<String, Variable>> blockStack) {
         List<TerminalNode> nameList = ctx.namelist().NAME();
         List<PandoraParser.ExpContext> expList = ctx.explist().exp();
 
-        this.saveVariable(nameList, expList, blockStack);
+        return this.saveVariable(nameList, expList, blockStack);
     }
 
     public void checkNotDefined(PandoraParser.AssignmentContext ctx, Stack<HashMap<String, Variable>> blockStack) {
@@ -78,16 +78,22 @@ public class VariablesListener {
         }
     }
 
-    private void saveVariable(List<TerminalNode> nameList, List<PandoraParser.ExpContext> expList, Stack<HashMap<String, Variable>> blockStack) {
+    private List<Variable> saveVariable(List<TerminalNode> nameList, List<PandoraParser.ExpContext> expList, Stack<HashMap<String, Variable>> blockStack) {
+        List<Variable> savedVariables = new ArrayList<Variable>();
+
         IntStream.range(0, nameList.size())
                 .forEach(idx -> {
                     TerminalNode nameToken = nameList.get(idx);
                     PandoraParser.ExpContext exp = expList.get(idx);
+                    Variable variable = new Variable(exp);
 
                     blockStack.peek().put(
                             nameToken.getText(),
-                            new Variable(exp));
+                            variable);
 
+                    savedVariables.add(variable);
                 });
+
+        return savedVariables;
     }
 }

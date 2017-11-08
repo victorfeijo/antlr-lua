@@ -4,12 +4,22 @@ import src.pandora.antlr.PandoraParser;
 import src.pandora.antlr.listeners.Types;
 
 public class Variable {
+
+    private String name;
     private Types type;
     private PandoraParser.ExpContext value;
 
-    public Variable(PandoraParser.ExpContext value) {
+    public Variable(
+            String name,
+            PandoraParser.ExpContext value) {
+
+        this.name = name;
         this.value = value;
         this.initType();
+    }
+
+    public String getName() {
+        return name;
     }
 
     public Types getType() {

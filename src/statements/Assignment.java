@@ -9,16 +9,25 @@ import src.pandora.antlr.listeners.Variable;
  */
 public class Assignment implements Statement {
 
-    private Variable lhs;
+    private LLVM.LLVMBuilderRef builder;
+    private Declaration lhs;
     private Expression rhs;
 
-    public Assignment(Variable variable, Expression rhs) {
+    public Assignment(
+            LLVM.LLVMBuilderRef builder,
+            Declaration lhs,
+            Expression rhs) {
+
+        this.builder = builder;
         this.lhs = lhs;
         this.rhs = rhs;
     }
 
     @Override
     public LLVM.LLVMValueRef generateCode() {
-        return null;
+        return LLVM.LLVMBuildStore(
+                builder,
+                rhs.generateCode(),
+                lhs.generateCode());
     }
 }

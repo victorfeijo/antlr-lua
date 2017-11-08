@@ -42,7 +42,7 @@ public class ModuleCreator {
                                 1,
                                 0));
 
-//        LLVMSetFunctionCallConv(mainFunction, LLVMCCallConv);
+        LLVMSetFunctionCallConv(mainFunction, LLVMCCallConv);
         LLVMBasicBlockRef entry = LLVMAppendBasicBlock(mainFunction, "entry");
         LLVMPositionBuilderAtEnd(builder, entry);
     }
@@ -64,7 +64,7 @@ public class ModuleCreator {
         LLVMAddConstantPropagationPass(pass);
         LLVMAddInstructionCombiningPass(pass);
         LLVMAddPromoteMemoryToRegisterPass(pass);
-        // LLVMAddDemoteMemoryToRegisterPass(pass); // Demotes every possible value to memory
+//         LLVMAddDemoteMemoryToRegisterPass(pass); // Demotes every possible value to memory
         LLVMAddGVNPass(pass);
         LLVMAddCFGSimplificationPass(pass);
         LLVMRunPassManager(pass, module);

@@ -7,6 +7,8 @@ import src.pandora.antlr.PandoraBaseListener;
 import src.pandora.antlr.PandoraParser;
 import src.expressions.PFloat;
 import src.expressions.PInteger;
+import src.statements.Assignment;
+import src.statements.Declaration;
 
 import java.util.HashMap;
 import java.util.List;
@@ -74,13 +76,18 @@ public class PandoraGlobalListener extends PandoraBaseListener {
             PInteger pRight = new PInteger(right);
 
             BinaryOperator addOp = new BinaryOperator(builder, operator, pLeft, pRight);
+            Declaration declaration = new Declaration(builder, variable);
+            Assignment assignment = new Assignment(builder, declaration, addOp);
 
-            // LLVMPositionBuilderAtEnd(builder, addOp.generateCode());
-            // LLVMBuildStore(builder, addOp.generateCode(), "muitodoido");
 
-            LLVMValueRef var = LLVMBuildAlloca(builder, LLVMInt32Type(), 'soma');
-            LLVMBuildStore(builder, var, addOp.generateCode());
-            // LLVMSetGlobalConstant(addOp.generateCode(), 4);
+            assignment.generateCode();
+
+//            LLVMPositionBuilderAtEnd(builder, addOp.generateCode());
+//            LLVMBuildStore(builder, addOp.generateCode(), "muitodoido");
+//
+//            LLVMValueRef var = LLVMBuildAlloca(builder, LLVMInt32Type(), 'soma');
+//            LLVMBuildStore(builder, var, addOp.generateCode());
+//            LLVMSetGlobalConstant(addOp.generateCode(), 4);
         });
     }
 
@@ -115,9 +122,9 @@ public class PandoraGlobalListener extends PandoraBaseListener {
 
     @Override
     public void exitNumber(PandoraParser.NumberContext ctx) {
-        if(ctx.INT() != null) {
+        if (ctx.INT() != null) {
             new PInteger(Integer.parseInt(ctx.INT().toString()));
-        } else if(ctx.FLOAT() != null) {
+        } else if (ctx.FLOAT() != null) {
             new PFloat(Float.parseFloat(ctx.INT().toString()));
         }
     }

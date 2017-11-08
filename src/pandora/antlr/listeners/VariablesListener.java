@@ -85,7 +85,7 @@ public class VariablesListener {
                 .forEach(idx -> {
                     TerminalNode nameToken = nameList.get(idx);
                     PandoraParser.ExpContext exp = expList.get(idx);
-                    Variable variable = new Variable(exp);
+                    Variable variable = new Variable(nameToken.getText(), exp);
 
                     blockStack.peek().put(
                             nameToken.getText(),

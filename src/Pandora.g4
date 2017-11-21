@@ -46,7 +46,7 @@ explist
     ;
 
 exp
-    : nil | bool
+    : nil | boolean
     | number
     | string
     | functiondef
@@ -151,7 +151,7 @@ string
     : NORMALSTRING | CHARSTRING | LONGSTRING
     ;
 
-bool
+boolean
     : 'true' | 'false'
     ;
 

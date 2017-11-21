@@ -42,9 +42,13 @@ class CodeGenerator(PandoraVisitor):
 
     def new_var(self, typ, ide, val=None):
         ptr = self.builder.alloca(typ, name=ide)
+        print("FUCK3")
         self.symbols.bind(ide, ptr)
+        print("FUCK4")
         if val is not None:
+            print("FUCK5")
             self.builder.store(val, ptr)
+            print("FUCK6")
 
     def new_func(self, typ, ide):
         self.func = ir.Function(self.module, typ, name=ide)
@@ -53,6 +57,26 @@ class CodeGenerator(PandoraVisitor):
     def new_block(self):
         block = self.func.append_basic_block(name='.entry')
         self.builder = ir.IRBuilder(block)
+
+    def visitChunk(self, ctx):
+
+        self.new_func(ir.FunctionType(self.types['Void'], []), 'main')
+        self.new_block()
+
+        return self.visitChildren(ctx)
+
+    def visitDefinition(self, ctx):
+        print("FUCK")
+        # self.new_block()
+        # typ = 
+        # id = ctx.namelist().getText()
+        ide = (ctx.namelist().NAME()[0])
+        typ = 'Int'
+        # print(ctx.namelist().NAME()[1])
+        print("FUCK2")
+        self.new_var(self.types[typ], ide)
+        print("FUCK BACK")
+        # return self.visitChildren(ctx)
 
     # def visitVarDecl(self, ctx):
     #     typ = ctx.typ().getText()

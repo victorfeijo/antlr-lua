@@ -37,6 +37,16 @@ public interface PandoraListener extends ParseTreeListener {
 	 */
 	void exitStat(PandoraParser.StatContext ctx);
 	/**
+	 * Enter a parse tree produced by {@link PandoraParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void enterConditional(PandoraParser.ConditionalContext ctx);
+	/**
+	 * Exit a parse tree produced by {@link PandoraParser#conditional}.
+	 * @param ctx the parse tree
+	 */
+	void exitConditional(PandoraParser.ConditionalContext ctx);
+	/**
 	 * Enter a parse tree produced by {@link PandoraParser#retstat}.
 	 * @param ctx the parse tree
 	 */

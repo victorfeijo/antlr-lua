@@ -14,7 +14,7 @@ import java.io.FileInputStream;
 public class Main {
   public static void main(String[] args) {
     try {
-      String filename = "./samples/block.pan";
+      String filename = "./samples/variables.pan";
       CharStream input = new UnbufferedCharStream(new FileInputStream(filename));
 
       PandoraLexer lexer = new PandoraLexer(input);

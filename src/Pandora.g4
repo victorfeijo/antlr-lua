@@ -12,12 +12,12 @@ stat
     : ';'
     | functioncall
     | 'break'
-    | ifstat
+    | conditional
     | definition
     | assignment
     ;
 
-ifstat
+conditional
     : 'if' exp 'then' block ('elseif' exp 'then' block)* ('else' block)? 'end'
     ;
 

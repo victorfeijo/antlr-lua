@@ -8,6 +8,7 @@ import org.antlr.v4.runtime.tree.ParseTreeWalker;
 import src.pandora.antlr.PandoraLexer;
 import src.pandora.antlr.PandoraParser;
 import src.pandora.antlr.listeners.PandoraGlobalListener;
+import src.pandora.antlr.visitors.PandoraGlobalVisitor;
 
 import java.io.FileInputStream;
 
@@ -22,10 +23,13 @@ public class Main {
       CommonTokenStream tokens = new CommonTokenStream(lexer);
       PandoraParser parser = new PandoraParser(tokens);
 
-      PandoraParser.ChunkContext chunkContext = parser.chunk();
+      // PandoraParser.ChunkContext chunkContext = parser.chunk();
 
-      ParseTreeWalker walker = new ParseTreeWalker();
-      walker.walk(new PandoraGlobalListener(), chunkContext);
+      // ParseTreeWalker walker = new ParseTreeWalker();
+      // walker.walk(new PandoraGlobalListener(), chunkContext);
+
+      PandoraGlobalVisitor visitor = new PandoraGlobalVisitor();
+      visitor.visit(parser.chunk());
     } catch (Exception e) {
       e.printStackTrace();
     }

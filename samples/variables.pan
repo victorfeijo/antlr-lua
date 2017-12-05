@@ -1,4 +1,5 @@
 def foo = 2
+def var = foo
 
 //def bar = {
 //  name = 'bar';

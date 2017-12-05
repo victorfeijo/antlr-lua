@@ -3,17 +3,26 @@ package src.pandora.antlr.listeners;
 import src.pandora.antlr.PandoraParser;
 
 public class Variable {
-    private Types type;
+    private String type;
     private PandoraParser.ExpContext value;
+    private int ist;
 
     public Variable(PandoraParser.ExpContext value) {
         this.value = value;
         this.initType();
     }
 
-    public Types getType() {
+    public Variable(PandoraParser.ExpContext value, int ist) {
+        this.value = value;
+        this.ist = ist;
+        this.initType();
+    }
+
+    public String getType() {
         return this.type;
     }
+
+    public int getIst() { return this.ist; }
 
     public PandoraParser.ExpContext getValue() {
         return this.value;
@@ -21,30 +30,30 @@ public class Variable {
 
     private void initType() {
         if (this.value.nil() != null) {
-            this.type = Types.NIL;
+            this.type = "nil";
         }
         else if (this.value.string() != null) {
-            this.type = Types.STRING;
+            this.type = "string";
         }
         else if (this.value.bool() != null) {
-            this.type = Types.BOOL;
+            this.type = "bool";
         }
         else if (this.value.number() != null) {
             if (this.value.number().INT() != null) {
-                this.type = Types.INT;
+                this.type = "i32";
             }
             else if (this.value.number().FLOAT() != null) {
-                this.type = Types.FLOAT;
+                this.type = "float";
             }
             else if (this.value.number().HEX() != null) {
-                this.type = Types.HEX;
+                this.type = "hex";
             }
         }
         else if (this.value.tableconstructor() != null) {
-            this.type = Types.TABLE;
+            this.type = "table";
         }
         else {
-            this.type = Types.NIL;
+            this.type = "NIL";
         }
     }
 }

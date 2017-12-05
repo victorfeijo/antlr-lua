@@ -56,13 +56,18 @@ public class PandoraGlobalVisitor extends PandoraBaseVisitor {
         Variable variable = new Variable(value, ++this.istCounter);
 
         this.variables.put(name, variable);
+        if(variable.getType() != "NIL") {
+            definitionBuilder.append("%" + this.istCounter + " = alloca " + variable.getType() + ", align 4\n");
+            definitionBuilder.append(this.visit(value));
+            definitionBuilder.append("%" + ++this.istCounter + " = load " + variable.getType() + ", " +
+                    variable.getType() + "* %" + (this.istCounter-1) + ", align 4\n");
+            definitionBuilder.append("store " + variable.getType() + " %" + this.istCounter +
+                    ", " + variable.getType() + "* %" + variable.getIst() + ", align 4\n");
+        } else {
+            definitionBuilder.append("%" + this.istCounter + " = alloca " + "i32" + ", align 4\n");
+            definitionBuilder.append(this.visit(value));
+        }
 
-        definitionBuilder.append("%" + this.istCounter + " = alloca " + variable.getType() + ", align 4\n");
-        definitionBuilder.append(this.visit(value));
-        definitionBuilder.append("%" + ++this.istCounter + " = load " + variable.getType() + ", " +
-                                 variable.getType() + "* %" + (this.istCounter-1) + ", align 4\n");
-        definitionBuilder.append("store " + variable.getType() + " %" + this.istCounter +
-                                 ", " + variable.getType() + "* %" + variable.getIst() + ", align 4\n");
 
         return definitionBuilder.toString();
     }
@@ -70,11 +75,16 @@ public class PandoraGlobalVisitor extends PandoraBaseVisitor {
     @Override
     public String visitExp(PandoraParser.ExpContext ctx) {
         StringBuilder expBuilder = new StringBuilder();
+//        System.out.println("print visit exp");
+
         if (ctx.number() != null) {
             if (ctx.number().INT() != null) {
                 expBuilder.append("%" + ++this.istCounter + " = alloca i32, align 4\n");
                 expBuilder.append("store i32 " + ctx.number().INT().getText() + ", i32* %" + this.istCounter + ", align 4\n");
             }
+        } else {
+            expBuilder.append("%" + ++this.istCounter + " = alloca i32, align 4\n");
+            expBuilder.append("load i32 " + "%" + variables.get(ctx.start.getText()).getIst() + ", i32* %" + this.istCounter + ", align 4\n");
         }
 
         return expBuilder.toString();
